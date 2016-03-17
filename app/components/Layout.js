@@ -7,6 +7,7 @@ export default class Layout extends React.Component{
     this.state = {
       city: ''
     };
+    
   }
   handleUpdateCity(e){
     this.setState({
