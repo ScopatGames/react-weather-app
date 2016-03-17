@@ -22,14 +22,22 @@ class ForecastContainer extends React.Component {
     });
   }
 
-  componentDidMount(){
-    weatherHelpers.getFiveDayForecast(this.props.routeParams.city)
+  requestData(city){
+    weatherHelpers.getFiveDayForecast(city)
     .then(function(data){
         this.setState({
           isLoading: false,
           fiveDayForecast: data
         });
     }.bind(this));
+  }
+
+  componentDidMount(){
+    this.requestData(this.props.routeParams.city);
+  }
+
+  componentWillReceiveProps(newProps){
+    this.requestData(newProps.routeParams.city);
   }
 
   render(){

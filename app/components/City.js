@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 export default class City extends React.Component {
   render(){
@@ -8,14 +7,13 @@ export default class City extends React.Component {
         <input
             className="form-control"
             placeholder="Denver, Colorado"
+            value={this.props.city}
             type="text"
             onChange={this.props.onUpdateCity}/>
-        <Link to={'/forecast/' + this.props.city}>
-          <button className="btn btn-success" style={this.props.styleObject} type="submit">
-            Get Weather
-          </button>
-        </Link>
-        </div>
+        <button type="button" onClick={this.props.onSubmitCity} className="btn btn-success" style={this.props.styleObject} type="submit">
+          Get Weather
+        </button>
+      </div>
     );
   }
 }
