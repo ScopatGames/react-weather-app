@@ -39,7 +39,7 @@ class ForecastContainer extends React.Component {
       );
     } else {
       return (
-        <Forecast handleClick={this.handleClick.bind(this)} fiveDayData={this.state.fiveDayForecast.list}/>
+        <Forecast city={this.props.routeParams.city.replace('\,', '\, ')} handleClick={this.handleClick.bind(this)} fiveDayData={this.state.fiveDayForecast.list}/>
       );
     }
   }
