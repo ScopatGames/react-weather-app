@@ -1,6 +1,8 @@
 import React from 'react';
 import { weatherHelpers } from './../utils/weatherHelpers';
 import utils from './../utils/utils';
+import Forecast from './../components/Forecast';
+import Loading from './../components/Loading';
 
 class ForecastContainer extends React.Component {
   constructor(props, context){
@@ -12,7 +14,6 @@ class ForecastContainer extends React.Component {
   }
 
   handleClick(data){
-    console.log('data: ', data);
     this.context.router.push({
       pathname: '/detail/' + this.props.routeParams.city,
       state: {
@@ -28,33 +29,17 @@ class ForecastContainer extends React.Component {
           isLoading: false,
           fiveDayForecast: data
         });
-        console.log("MOUNTED CONTAINER STATE", this.state);
     }.bind(this));
   }
 
   render(){
     if(this.state.isLoading){
       return (
-        <h1>Loading...</h1>
+        <Loading />
       );
     } else {
-      var fiveDayArray = this.state.fiveDayForecast.list;
-      var fiveDayArrayListItems = fiveDayArray.map(function(day, index){
-        return (
-          <li key={index} onClick={this.handleClick.bind(this, day)}>
-            <img src={"http://openweathermap.org/img/w/"+day.weather[0].icon +".png"} />
-            <span>(Please pretend these icons aren't ugly, thx)</span>
-            <h2>{utils.getDate(day.dt)}</h2>
-          </li>
-        )
-      }.bind(this));
       return (
-        <div className="forecast-container">
-          <h1>{this.props.routeParams.city.replace(',', ', ')}</h1>
-          <ul>
-            {fiveDayArrayListItems}
-          </ul>
-        </div>
+        <Forecast handleClick={this.handleClick.bind(this)} fiveDayData={this.state.fiveDayForecast.list}/>
       );
     }
   }
