@@ -11,6 +11,3 @@ Clone the repo
 
 ```npm run start```
 
-## Use on hosted site
-
-Play with the app [here](http://scottpatten.net/weather-app/)
